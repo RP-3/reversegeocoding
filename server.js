@@ -5,27 +5,25 @@ var util = require('util');
 http.createServer(function (req, res) {
   gm.reverseGeocode('-33.753211,151.08205', function(err, data){
     console.log(err);
-    console.log(data);
-
+    
     var igra = data.results;
+    var result = "";
+    
 
     for (var el = 0; el < igra.length; el++) {
 
-
       var target = igra[el];
 
-      if (target.geometry.location_type !== "APPROXIMATE") {
-      
-        console.log(target.geometry.location_type);
-        console.log(target.formatted_address);
-        console.log();
-      
+      if (target.geometry.location_type !== "APPROXIMATE") {      
+        result = result + 
+          target.geometry.location_type + "," + 
+          target.formatted_address;
       }
-
 
     } 
 
-    res.end();
+    res.end(result);
+
   });
 
 
