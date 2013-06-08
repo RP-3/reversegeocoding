@@ -7,9 +7,14 @@ http.createServer(function (req, res) {
     console.log(err);
     console.log(data);
 
-    for (var element = 0; element < data.results.length; element++) {
-      console.log(data.results[element].geometry.location_type);
-      console.log(data.results[element].formatted_address);
+    var igra = data.results;
+
+    for (var el = 0; el < igra.length; el++) {
+      
+      var target = igra[el];
+
+      console.log(target.geometry.location_type);
+      console.log(target.formatted_address);
       console.log();
     } 
 
