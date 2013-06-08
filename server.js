@@ -10,12 +10,19 @@ http.createServer(function (req, res) {
     var igra = data.results;
 
     for (var el = 0; el < igra.length; el++) {
-      
+
+
       var target = igra[el];
 
-      console.log(target.geometry.location_type);
-      console.log(target.formatted_address);
-      console.log();
+      if (target.geometry.location_type !== "APPROXIMATE") {
+      
+        console.log(target.geometry.location_type);
+        console.log(target.formatted_address);
+        console.log();
+      
+      }
+
+
     } 
 
     res.end();
