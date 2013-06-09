@@ -4,9 +4,11 @@ var csv = require('ya-csv');
 
 var reader = csv.createCsvFileReader('sampleinput.csv');
 
-var revCoder = function(stuff) {
+var csvInputList = [];
 
-  var coordString = "" + stuff[0] + "," + stuff[1];
+var googFetch = function(inputLine) {
+
+  var coordString = "" + inputLine[0] + "," + inputLine[1];
 
   gm.reverseGeocode(coordString, function(err, data){
     
@@ -30,13 +32,26 @@ var revCoder = function(stuff) {
 
     } 
 
-    console.log(stuff[0] + "," , stuff[1]+ ",", stuff[2]+ ",", result);
+    console.log(inputLin\e[0] + "," , inputLine[1]+ ",", inputLine[2]+ ",", result);
+
+    googFetchCaller();
 
   });
 
 };
 
-reader.addListener('data', revCoder);
+reader.addListener('data', function(sentLine) {
+  csvInputList.push(sentLine);
+});
+
+var googFetchCaller = function(){
+  if (csvInputList.length > 0) {
+    var inputLine = csvInputList.pop();
+    googFetch(inputLine);
+  }
+};
+
+reader.addListener('end', googFetchCaller);
 
 
 
