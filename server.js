@@ -32,7 +32,7 @@ var googFetch = function(inputLine) {
 
     } 
 
-    console.log(inputLin\e[0] + "," , inputLine[1]+ ",", inputLine[2]+ ",", result);
+    console.log(inputLine[0] + "," , inputLine[1]+ ",", inputLine[2]+ ",", result);
 
     googFetchCaller();
 
@@ -46,8 +46,7 @@ reader.addListener('data', function(sentLine) {
 
 var googFetchCaller = function(){
   if (csvInputList.length > 0) {
-    var inputLine = csvInputList.pop();
-    googFetch(inputLine);
+    googFetch(csvInputList.pop());
   }
 };
 
